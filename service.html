@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+	<title>Health Calculator</title>
+</head>
+<body>
+  <center><b class="text-warning" style="font-size: 1.5rem;">Health Calculator</b></center>
+	<nav aria-label="...">
+		<ul class="pagination pagination-lg">
+      <li class="page-item"><a class="page-link" href="index.html">Home</a></li>
+		  <li class="page-item active"><a class="page-link" href="service.html">AGE CALCULATOR</a></li>
+		  <li class="page-item" aria-current="page"><a class="page-link" href="contact.html">BMI CALCULATOR</a></li>
+		</ul>
+	<center>Calculate Your Age</center>        
+ 
+
+   
+	<div class="row" >
+	  <div class="col-5 bg-white" style="padding: 10px;">
+		<p> Enter Your Date Of Birth
+		<input type="date" id="date-input"></p>
+		<button  id="btn" onclick="ageCalculate()">Calculate</button>
+	  </div>
+	  <div class="col-7 bg-primary" style="text-align: center;padding: 50px;">
+		<p style="color: white;"><span id="years"></span> Years <span id="months"></span> Months <span id="days"></span> Days</p>
+	  </div>
+	</div>
+
+
+
+
+	<div class="row align-items-end" style="margin-top:10px;padding: 5px;">
+		<div class="col bg-white text-dark">
+		  <p>About Website: <br>
+			Age Calculator</p>
+		</div>
+		<div class="col bg-primary text-white">
+		  <p>Developer:
+			<br> Rajnish Kumar</p>
+		</div>
+		<div class="col bg-white text-dark">
+			<p> Contact Us ! <br>
+			<a href="https://wa.me/919065407531"><i class="fa-brands fa-whatsapp"></i></a> ||
+            <a href="mailto:rockstarrajnish4658@gmail.com"><i class="fa-solid fa-envelope"></i></a> ||
+            <a href="tel:9570-986-396"><i class="fa-solid fa-phone"></i></a> ||</p>
+		</div>
+	  </div>
+	</div>
+	<script>
+		const months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+function ageCalculate() {
+    let today = new Date();
+    let inputDate = new Date(document.getElementById("date-input").value);
+    let birthMonth, birthDate, birthYear;
+    let birthDetails = {
+        date: inputDate.getDate(),
+        month: inputDate.getMonth() + 1,
+        year: inputDate.getFullYear()
+    }
+    let currentYear = today.getFullYear();
+    let currentMonth = today.getMonth() + 1;
+    let currentDate = today.getDate();
+
+    leapChecker(currentYear);
+
+    if (
+        birthDetails.year > currentYear ||
+        (birthDetails.month > currentMonth && birthDetails.year == currentYear) ||
+        (birthDetails.date > currentDate && birthDetails.month == currentMonth && birthDetails.year == currentYear)
+    ) {
+        alert("Not Born Yet");
+        displayResult("-", "-", "-");
+        return;
+    }
+
+    birthYear = currentYear - birthDetails.year;
+
+    if (currentMonth >= birthDetails.month) {
+        birthMonth = currentMonth - birthDetails.month;
+    }
+    else {
+        birthYear--;
+        birthMonth = 12 + currentMonth - birthDetails.month;
+    }
+
+    if (currentDate >= birthDetails.date) {
+        birthDate = currentDate - birthDetails.date;
+    }
+    else {
+        birthMonth--;
+        let days = months[currentMonth - 2];
+        birthDate = days + currentDate - birthDetails.date;
+        if (birthMonth < 0) {
+            birthMonth = 11;
+            birthYear--;
+        }
+    }
+    displayResult(birthDate, birthMonth, birthYear);
+}
+
+function displayResult(bDate, bMonth, bYear) {
+    document.getElementById("years").textContent = bYear;
+    document.getElementById("months").textContent = bMonth;
+    document.getElementById("days").textContent = bDate;
+}
+
+function leapChecker(year) {
+    if (year % 4 == 0 || (year % 100 == 0 && year % 400 == 0)) {
+        months[1] = 29;
+    }
+    else {
+        months[1] = 28;
+    }
+}
+	</script>
+</body>
+</html>

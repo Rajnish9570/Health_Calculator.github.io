@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+	<title>Health Calculator</title>
+</head>
+<body>
+  <center><b class="text-warning" style="font-size: 1.5rem;">Health Calculator</b></center>
+  <nav aria-label="...">
+    <ul class="pagination pagination-lg">
+      <li class="page-item"><a class="page-link" href="index.html">Home</a></li>
+      <li class="page-item"><a class="page-link" href="service.html">AGE CALCULATOR</a></li>
+      <li class="page-item active" aria-current="page"><a class="page-link" href="contact.html">BMI CALCULATOR</a></li>
+    </ul>
+  </nav>
+    	
+    		<center>Check your BMI</center>	
+    <div class="row">
+      <div class="col bg-white" style="padding: 10px;" >
+        <p>Put your weight in here (KG)
+          <input id="weight" type="number" pattern="[0-9]*" name="a" /></p>
+          <p>And your height in here (CM)
+          <input id="height" type="number" pattern="[0-9]*" name="b"/> </p>
+          <button type="button" id="btn" onclick="calculate()">Calculate BMI</button>
+         
+                
+              
+      </div>
+      <div class="col bg-primary" style="text-align: center;padding: 50px;">
+        <div id="results" class="text-center text-white">Your BMI results will appear here</div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row align-items-end" style="margin-top:10px;padding: 5px;">
+      <div class="col bg-white text-dark">
+        <p>About Website: <br>
+        BMI Calculator</p>
+      </div>
+      <div class="col bg-primary text-white">
+        <p>Developer:
+        <br> Rajnish Kumar</p>
+      </div>
+      <div class="col bg-white text-dark">
+        <p> Contact Us ! <br>
+        <a href="https://wa.me/919065407531"><i class="fa-brands fa-whatsapp"></i></a> ||
+              <a href="mailto:rockstarrajnish4658@gmail.com"><i class="fa-solid fa-envelope"></i></a> ||
+              <a href="tel:9570-986-396"><i class="fa-solid fa-phone"></i></a> ||</p>
+      </div>
+      </div>
+    </div>
+
+
+	<script>
+    var weight, height, measure, bmi, error ;
+
+function calculate() {
+	weight = document.getElementById("weight").value;
+	height = document.getElementById("height").value;
+	error = "Please enter some values";
+	height /= 100;
+	height *= height;
+	bmi = weight/height;
+	bmi = bmi.toFixed(1);
+
+	if (bmi <= 18.4) {
+		measure = "Your BMI is " + bmi + " which means " + "you are Underweight";
+	} else if (bmi >= 18.5 && bmi <= 24.9) {
+		measure = "Your BMI is " + bmi + " which means " + "You are Healthy";
+	} else if (bmi >= 25 && bmi <= 29.9) {
+		measure = "Your BMI is " + bmi + " which means " + "You are Overweight";
+	} else if (bmi >= 30) {
+		measure = "Your BMI is " + bmi + " which means " + "You are Obese";
+	}
+	
+
+	if (weight === 0 ) {
+		document.getElementById("results").innerHTML = error;
+	} else if (height === 0){
+		document.getElementById("results").innerHTML = error;
+	}
+	 else {
+
+		document.getElementById("results").innerHTML = measure;
+	}
+	if (weight < 0) {
+		document.getElementById("results").innerHTML = "Negative Values not Allowed";
+	}
+}
+
+  </script>
+</body>
+</html>
